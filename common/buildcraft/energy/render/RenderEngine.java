@@ -154,21 +154,21 @@ public class RenderEngine extends TileEntitySpecialRenderer implements IInventor
 
 		box.render(factor);
 
+		GL11.glPushMatrix();
 		GL11.glTranslatef(translate[0] * translatefact, translate[1] * translatefact, translate[2] * translatefact);
 		movingBox.render(factor);
-		GL11.glTranslatef(-translate[0] * translatefact, -translate[1] * translatefact, -translate[2] * translatefact);
+		GL11.glPopMatrix();
 
 		ForgeHooksClient.bindTexture(DefaultProps.TEXTURE_PATH_BLOCKS + "/chamber.png", 0);
 
 		float chamberf = 2F / 16F;
 
+		GL11.glPushMatrix();
 		for (int i = 0; i <= step + 2; i += 2) {
 			chamber.render(factor);
 			GL11.glTranslatef(translate[0] * chamberf, translate[1] * chamberf, translate[2] * chamberf);
 		}
-
-		for (int i = 0; i <= step + 2; i += 2)
-			GL11.glTranslatef(-translate[0] * chamberf, -translate[1] * chamberf, -translate[2] * chamberf);
+		GL11.glPopMatrix();
 
 		String texture = "";
 
